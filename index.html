@@ -289,7 +289,7 @@
             <h3>🎵 My Voice Messages 🎵</h3>
             
             <div class="upload-group" id="audio-morning">
-                <label>🌅 My Morning Message:</label>
+                <label>🌅 My Morning Love Message:</label>
                 <audio controls preload="auto" id="morningAudio">
                     <source src="good-morning.mp3" type="audio/mp3">
                     <source src="good-morning.m4a" type="audio/mp4">
@@ -298,7 +298,7 @@
             </div>
             
             <div class="upload-group" id="audio-noon">
-                <label>☀️ My Noon Message:</label>
+                <label>☀️ My Noon Love Message:</label>
                 <audio controls preload="auto" id="noonAudio">
                     <source src="good-noon.mp3" type="audio/mp3">
                     <source src="good-noon.m4a" type="audio/mp4">
@@ -307,7 +307,7 @@
             </div>
             
             <div class="upload-group" id="audio-afternoon">
-                <label>🌤️ My Afternoon Message:</label>
+                <label>🌤️ My Afternoon Love Message:</label>
                 <audio controls preload="auto" id="afternoonAudio">
                     <source src="good-afternoon.mp3" type="audio/mp3">
                     <source src="good-afternoon.m4a" type="audio/mp4">
@@ -316,7 +316,7 @@
             </div>
             
             <div class="upload-group" id="audio-evening">
-                <label>🌆 My Evening Message:</label>
+                <label>🌆 My Evening Love Message:</label>
                 <audio controls preload="auto" id="eveningAudio">
                     <source src="good-evening.mp3" type="audio/mp3">
                     <source src="good-evening.m4a" type="audio/mp4">
@@ -325,7 +325,7 @@
             </div>
             
             <div class="upload-group" id="audio-night">
-                <label>🌙 My Night Message:</label>
+                <label>🌙 My Night Love Message:</label>
                 <audio controls preload="auto" id="nightAudio">
                     <source src="good-night.mp3" type="audio/mp3">
                     <source src="good-night.m4a" type="audio/mp4">
@@ -336,7 +336,7 @@
         
         <div style="margin-top: 30px; padding: 20px; background: rgba(255, 193, 7, 0.2); border-radius: 15px; border: 1px solid rgba(255, 193, 7, 0.5);">
             <p style="font-weight: bold; color: #FFD700; font-size: 1.1em;">
-                💖 This app automatically shows you a special message based on the time you visit, so you don’t feel lonely and know that I’m still here for you.
+                💖 This app shows you a different special message every single day based on the time you visit, so each day feels unique and you always know I'm here for you.
                 The matching audio will also be highlighted! Just for you, Jemma Rose 💖
             </p>
         </div>
@@ -368,38 +368,170 @@
             heartInterval = setInterval(createFloatingHeart, 1500);
         }
         
-       // Get greeting message based on time
-      // Get greeting message based on time
-function getGreetingMessage() {
-    const now = new Date();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    let message = "";
-    let audioCategory = "";
-    
-    if (hour >= 5 && hour < 12) {
-        message = "Good morning Jemma 🌞 I hope you slept well and that today brings you peace and positivity. Don’t forget to eat breakfast and take care of yourself.";
-        audioCategory = "morning";
-    } else if (hour === 12) {
-        message = "Good noon Jemma 🌸 It’s the middle of the day—stay hydrated, keep going, and remember to take small breaks for yourself.";
-        audioCategory = "noon";
-    } else if (hour >= 13 && hour < 17) {
-        message = "Good afternoon Jemma 🌺 I hope your day is going smoothly. Keep your head up and don’t forget that you’ve got the strength to handle anything.";
-        audioCategory = "afternoon";
-    } else if (hour === 17 || (hour === 18 && minute < 30)) {
-        message = "Hi Jemma 🌅 The sun is about to set. I just wanted to remind you to take a pause, breathe, and enjoy the little moments of peace around you.";
-        audioCategory = "sunset";
-    } else if (hour >= 18 && hour < 22) {
-        message = "Good evening Jemma 🌆 As the day winds down, I hope you can find some time to relax and breathe. You deserve peace and rest tonight.";
-        audioCategory = "evening";
-    } else {
-        message = "Good night Jemma 🌙 Time to rest and recharge. Sleep well and may tomorrow be kinder and brighter for you.";
-        audioCategory = "night";
-    }
-    
-    return { message, audioCategory };
-}
+        // Seeded random number generator for consistent daily randomness
+        function seededRandom(seed) {
+            let x = Math.sin(seed) * 10000;
+            return x - Math.floor(x);
+        }
+        
+        // Get today's seed (changes each day)
+        function getTodaysSeed() {
+            const now = new Date();
+            // Create a seed based on year, month, and day (ignores time)
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1; // 0-based, so add 1
+            const day = now.getDate();
+            return year * 10000 + month * 100 + day;
+        }
+        
+        // Get random message based on time and daily seed
+        function getGreetingMessage() {
+            const now = new Date();
+            const hour = now.getHours();
+            const minute = now.getMinutes();
+            const todaysSeed = getTodaysSeed();
+            let audioCategory = "";
+            
+            // Extended message arrays for more variety
+           const morningMessages = [
+                "Good morning, Jemm! 🌟 Today is a fresh canvas, and you have all the colors you need to paint something meaningful. Keep believing in yourself, you’re stronger than you think.",
+                "Rise and shine, Jemm! 💫 Your strength amazes me every single day. Whatever today brings, remember you don’t have to carry it all alone.",
+                "Morning Jemm! ☀️ Every sunrise is a reminder that new beginnings are always possible. You deserve peace, happiness, and brighter days ahead.",
+                "Good morning, Jemm! 🌺 The world feels a little lighter because you’re in it. May today bring you calm and gentle moments.",
+                "Wake up, Jemm! ✨ Your dreams are still waiting for you, and I know you have the courage to keep moving forward. I’m quietly cheering you on.",
+                "Good morning, Jemm! 🦋 Like a butterfly emerging from its cocoon, you’re growing through every challenge. Trust your journey.",
+                "Morning, Jemm! 🌸 Your kindness touches more lives than you realize. Today, I hope that same kindness finds its way back to you.",
+                "Good morning, Jemm! 🌈 After every storm comes a rainbow. Whatever season you’re in, know that healing and brighter days are coming.",
+                "Rise up, Jemm! 💪 Your resilience is one of the things I admire most. You’ve overcome so much already, and you’ll handle today with the same strength.",
+                "Good morning, Jemm! 👼 Your presence in this world matters more than you may know. Thank you for simply being you.",
+                "Morning, Jemm! 💝 Today holds new opportunities for joy, learning, and growth. You deserve to embrace them all with an open heart.",
+                "Good morning, Jemm! 🎯 Watching you pursue your goals has always been inspiring. Keep going—you’re closer than you think.",
+                "Wake up, Jemm! 🌅 Each morning is a chance to write a new story. May today’s chapter be filled with clarity and hope.",
+                "Good morning, Jemm! 💎 You are rare, valuable, and irreplaceable. Never forget your worth, even on the harder days.",
+                "Morning, Jemm! 🦁 Courage isn’t about not feeling afraid, it’s about moving forward despite the fear. And you’ve shown that beautifully."
+            ];
 
+            
+            const noonMessages = [
+                "Midday check-in, Jemm! 🌞 You’ve already made it halfway through the day, don’t forget to pause and appreciate how far you’ve come.",
+                "Noon reminder, Jemm! 💫 Right now, in this very moment, you are enough. You are worthy. Don’t let anyone make you feel otherwise.",
+                "Lunchtime pause, Jemm! 🍀 I hope you’re taking care of yourself today. Your well being matters more than you may realize.",
+                "Midday motivation, Jemm! ⚡ Even when today feels heavy, remember that challenges shape resilience. You’re growing stronger every step.",
+                "Noon encouragement, Jemm! 🌺 Your journey is uniquely yours, and it’s unfolding at the pace it needs to. Trust yourself.",
+                "Afternoon energy, Jemm! 🎈 The sun is shining, and so are you. Let your light guide you forward today.",
+                "Midday reminder, Jemm! 🌻 You don’t have to be perfect to deserve peace and happiness. Who you are right now is enough.",
+                "Noon inspiration, Jemm! 🌟 Every small step forward is still progress. Be proud of yourself for moving, even little by little.",
+                "Lunchtime reflection, Jemm! 🦋 Change can be difficult, but it’s also where growth lives. Trust that transformation is on your side.",
+                "Midday insight, Jemm! ✨ You have a rare gift the way you make others feel seen and valued. That’s something truly special.",
+                "Noon nurturing, Jemm! 🌿 Be gentle with yourself today. Healing isn’t a straight path, but you’re doing better than you think.",
+                "Afternoon gratitude, Jemm! 💕 Someone out there is thankful for your existence and I hope today, that someone is you too.",
+                "Midday marvel, Jemm! 🌈 Life’s story has twists and turns, but you’re still the author of your own pages. What chapter will you write today?",
+                "Noon note, Jemm! 🎭 Your feelings matter, your dreams matter, and your voice deserves to be heard. Speak your truth confidently.",
+                "Lunchtime reminder, Jemm! 💌 If you could see the way others see your strength and value, you’d never doubt yourself again."
+            ];
+
+            
+            const afternoonMessages = [
+                "Afternoon reflection, Jemm! 🌅 The day may be winding down, but your potential is just beginning. What seeds will you plant for tomorrow?",
+                "Good afternoon, Jemm! 💝 Your patience with yourself and others shows deep wisdom. Keep nurturing that gentle spirit.",
+                "Afternoon inspiration, Jemm! 🦋 Like a garden, you’re always growing and blooming. Some seasons are for planting, others for harvesting.",
+                "Mid-afternoon boost, Jemm! 🌊 Life’s waves can feel overwhelming, but you know how to navigate the waters. Trust your resilience.",
+                "Afternoon admiration, Jemm! 🌟 The way you care for others while still working on yourself is inspiring. You have such a generous heart.",
+                "Good afternoon, Jemm! 🎨 You are both the artist and the masterpiece. Keep adding brushstrokes to the story of your life.",
+                "Afternoon reminder, Jemm! 👼 Your sensitivity is not a weakness, it’s a strength. The world needs more hearts like yours.",
+                "Late afternoon encouragement, Jemm! 🌺 Every ending is also a beginning. Letting go makes space for new blessings to come in.",
+                "Afternoon appreciation, Jemm! 🍂 Like autumn leaves, sometimes we need to release what no longer serves us to make room for growth.",
+                "Good afternoon, Jemm! ⚔️ You’ve fought battles others can’t see, and you’re still standing. That makes you incredibly strong.",
+                "Afternoon awakening, Jemm! 🔔 Your intuition is your compass. Trust those quiet inner nudges, they often lead you to better paths.",
+                "Late afternoon light, Jemm! 💡 You brighten the lives of those around you. Don’t forget to let some of that light shine back on yourself too.",
+                "Afternoon anthem, Jemm! 🎵 Your life is like a song—full of highs, lows, and everything in between. Keep singing your truth.",
+                "Good afternoon, Jemm! 🌙 Your dreams aren’t too big or too far away. They’re simply waiting for the right moment to bloom.",
+                "Afternoon abundance, Jemm! 🌾 You already carry within you everything you need to succeed. Trust yourself and your journey."
+            ];
+
+           const eveningMessages = [
+                "Good evening, Jemm! 🌙 As the day settles into night, I hope you can feel proud of what you’ve managed today—even the small wins matter.",
+                "Evening reflection, Jemm! 💫 Showing up as yourself today was enough. Thank you for continuing to move forward, even on the harder days.",
+                "Good evening, Jemm! 🕯️ In tonight’s quiet, may you remember that you are valued, appreciated, and worthy of kindness.",
+                "Evening peace, Jemm! 🌸 Let go of any heaviness from today. Rest is not a reward—it’s something you truly deserve.",
+                "Sunset thoughts, Jemm! 🌅 Every sunset reminds us that endings can be beautiful too. What are you ready to release tonight?",
+                "Good evening, Jemm! ⭐ Like the stars, your light often shines brightest when things feel dark. Don’t forget the strength you carry.",
+                "Evening comfort, Jemm! 🤗 If today felt heavy, may this message remind you that you’re not alone in your journey.",
+                "Good evening, Jemm! 💎 Even if it didn’t feel like it, you handled today with quiet strength. That’s something to be proud of.",
+                "Evening encouragement, Jemm! 🌟 The best chapters of your life are still unfolding. Rest well and prepare for brighter tomorrows.",
+                "Twilight reminder, Jemm! 🦋 Change is like dusk—it happens gradually. Be patient with your own transformation.",
+                "Evening compassion, Jemm! 💕 It’s okay if today was tough. It’s okay if you’re tired. You’re still doing better than you think.",
+                "Good evening, Jemm! 👑 You carry yourself with a kind of grace that’s rare. Even in messy moments, your dignity shines through.",
+                "Evening strength, Jemm! 🎈 You’ve risen above so much already. Trust that you’ll rise again, no matter what comes next.",
+                "Dusk gratitude, Jemm! 🙏 I’m thankful for the person you are, for your resilience, and for the way you keep going despite challenges.",
+                "Evening reminder, Jemm! ♾️ Some bonds and lessons in life stay with us forever. May tonight bring you peace and clarity."
+            ];
+
+            
+            const nightMessages = [
+                "Good night, Jemm! 🌙 Rest your mind and heart. Tomorrow brings new possibilities and fresh hope.",
+                "Nighttime wishes, Jemm! ✨ As you close your eyes, may peace and comfort surround you with the sweetest dreams.",
+                "Good night, Jemm! 💤 You carried a lot today. Let sleep wash away the weight and restore your spirit.",
+                "Bedtime comfort, Jemm! 🌟 In the quiet of night, remember that your presence matters more than you may realize.",
+                "Good night, Jemm! 🦋 Like flowers resting before a new bloom, may your sleep prepare you for tomorrow’s light.",
+                "Sweet dreams, Jemm! 💫 Sleep isn’t giving up, it’s preparing. May your dreams remind you of all that’s still ahead.",
+                "Nighttime nurture, Jemm! 🌙 You are safe, and you are enough. Let that truth hold you tonight.",
+                "Good night, Jemm! 🕊️ The gentleness you show others is something you deserve to give yourself, too.",
+                "Bedtime blessing, Jemm! 🙏 May you wake up tomorrow refreshed, hopeful, and ready for the good waiting ahead.",
+                "Good night, dreamer Jemm! 💭 Your hopes are valid, and your heart knows the way forward. Trust in it.",
+                "Nighttime reminder, Jemm! 🎵 Life is like a symphony, your notes make it brighter. Rest now, tomorrow has its own song.",
+                "Sweet slumber, Jemm! 😴 You don’t need to solve everything tonight. Some answers come with rest and time.",
+                "Good night, Jemm! 🛡️ You faced today with courage. Now it’s time to lay down your armor and rest peacefully.",
+                "Bedtime reminder, Jemm! 🌹 Your inner strength and kindness shine quietly, even in stillness. Never forget that.",
+                "Nighttime peace, Jemm! 💝 No matter what, you are valued and remembered. May tonight bring you calm and clarity."
+            ];
+
+            
+            // Select message array based on time
+            let messageArray;
+            if (hour >= 5 && hour < 12) {
+                messageArray = morningMessages;
+                audioCategory = "morning";
+            } else if (hour === 12) {
+                messageArray = noonMessages;
+                audioCategory = "noon";
+            } else if (hour >= 13 && hour < 17) {
+                messageArray = afternoonMessages;
+                audioCategory = "afternoon";
+            } else if (hour === 17 || (hour === 18 && minute < 30)) {
+                // Golden hour special message
+               const goldenHourMessages = [
+                "Golden hour magic, Jemm! 🌅 Even endings can be beautiful. This season of change is shaping you in meaningful ways.",
+                "Sunset serenity, Jemm! 🌇 The golden light is a reminder to pause, breathe, and appreciate the warmth you bring into the world.",
+                "Golden hour grace, Jemm! ✨ Just like the sun coloring the sky, your presence adds something unique and meaningful. Never doubt your impact.",
+                "Evening glow, Jemm! 🌄 The sky reminds us that transitions can be gentle and filled with beauty. Trust your own unfolding.",
+                "Golden stillness, Jemm! 🌞 As the day softens into night, may you find peace in knowing you’ve done your best today.",
+                "Sunset reminder, Jemm! 🌅 Just as the sun sets to rise again, any ending in your life makes space for new beginnings.",
+                "Golden perspective, Jemm! 🌇 Sometimes the most beautiful views come at the end of the day—be proud of how far you’ve come.",
+                "Twilight reflection, Jemm! 🌆 The golden hour invites you to release today’s heaviness and carry only what helps you grow.",
+                "Golden peace, Jemm! 🌄 Let the soft light remind you that slowing down is also progress. Rest is part of your journey.",
+                "Sunset blessing, Jemm! 🌇 May the fading light wrap you in calm, hope, and quiet strength for tomorrow."
+            ];
+
+                const randomIndex = Math.floor(seededRandom(todaysSeed + hour) * goldenHourMessages.length);
+                return { 
+                    message: goldenHourMessages[randomIndex], 
+                    audioCategory: "evening" 
+                };
+            } else if (hour >= 18 && hour < 22) {
+                messageArray = eveningMessages;
+                audioCategory = "evening";
+            } else {
+                messageArray = nightMessages;
+                audioCategory = "night";
+            }
+            
+            // Use seeded random to select message (same message for same day+hour)
+            const randomIndex = Math.floor(seededRandom(todaysSeed + hour) * messageArray.length);
+            const message = messageArray[randomIndex];
+            
+            return { message, audioCategory };
+        }
 
         // Update time display
         function updateTime() {
@@ -516,4 +648,3 @@ function getGreetingMessage() {
     </script>
 </body>
 </html>
-
